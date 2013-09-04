@@ -19,8 +19,8 @@ def main():
 	
 	# Open csv files
 	with open(args.file1,"rb") as file1, open(args.file2,"rb") as file2:	
-		read1 = csv.reader(file1, delimiter=' ',quotechar='|')
-		read2 = csv.reader(file2, delimiter=' ',quotechar='|')
+		read1 = csv.reader(file1)
+		read2 = csv.reader(file2)
 
 		# Print contents of csv file for debug
 		if args.dbg:
@@ -33,10 +33,10 @@ def main():
 					header = row
 				else:
 					colnumber = 0
-					for colnumber in row:
+					for col in row:
 						print '%-8s: %s' % (header[colnumber],col)
 						colnumber += 1
-						rownumber += 1
+				rownumber += 1
 
 			print "csv file 2 contents here"
 			rownumber = 0
@@ -45,10 +45,10 @@ def main():
 					header = row
 				else:
 					colnumber = 0
-					for colnumber in row:
+					for col in row:
 						print '%-8s: %s' %(header[colnumber],col)
 						colnumber += 1
-						rownumber += 1
+				rownumber += 1
 			
 
 
