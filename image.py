@@ -18,40 +18,37 @@ def main():
 		exit()
 	
 	# Open csv files
-	file1 = open(args.file1,"rb")
-	file2 = open(args.file2,"rb")
-	
-	read1 = csv.reader(file1, delimiter=' ',quotechar='|')
-	read2 = csv.reader(file2, delimiter=' ',quotechar='|')
+	with open(args.file1,"rb") as file1, open(args.file2,"rb") as file2:	
+		read1 = csv.reader(file1, delimiter=' ',quotechar='|')
+		read2 = csv.reader(file2, delimiter=' ',quotechar='|')
 
-
-	# Print contents of csv file for debug
-	if args.dbg:
+		# Print contents of csv file for debug
+		if args.dbg:
 
 		#this iteration assumes that the first row is a header of some sort, might need to change that 
-		print "csv file 1 contents here" 
-		rownumber = 0
-		for row in read1:
-			if rownumber == 0:
-				header = row
-			else:
-				colnumber = 0
-				for colnumber in row:
-					print '%-8s: %s' % (header[colnumber],col)
-					colnumber += 1
-			rownumber += 1
+			print "csv file 1 contents here" 
+			rownumber = 0
+			for row in read1:
+				if rownumber == 0:
+					header = row
+				else:
+					colnumber = 0
+					for colnumber in row:
+						print '%-8s: %s' % (header[colnumber],col)
+						colnumber += 1
+						rownumber += 1
 
-		print "csv file 2 contents here"
-		rownumber = 0
-		for row in read2:
-			if rownumber == 0:
-				header = row
-			else:
-				colnumber = 0
-				for colnumber in row:
-					print '%-8s: %s' %(header[colnumber],col)
-					colnumber += 1
-			rownumber += 1
+			print "csv file 2 contents here"
+			rownumber = 0
+			for row in read2:
+				if rownumber == 0:
+					header = row
+				else:
+					colnumber = 0
+					for colnumber in row:
+						print '%-8s: %s' %(header[colnumber],col)
+						colnumber += 1
+						rownumber += 1
 			
 
 
