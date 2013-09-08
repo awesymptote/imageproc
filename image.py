@@ -6,7 +6,7 @@ import sys
 import Image, ImageDraw
 
 def main():
-
+	# Dougs branch
 	# Set up parser 
 	parser = argparse.ArgumentParser()
 	parser.add_argument("file1",help="first file to compare") # <-- required arg
