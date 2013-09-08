@@ -3,6 +3,7 @@ import argparse
 import csv
 import os
 import sys
+import Image, ImageDraw
 
 def main():
 
@@ -27,38 +28,37 @@ def main():
 		list1 = list(csv.reader(file1))
 		list2 = list(csv.reader(file2))
 
-		'''
-		# Print contents of csv file for debug to stdout
-		if args.dbg:
-
-			read1 = csv.reader(file1)
-			read2 = csv.reader(file2)
-
-			print "csv file 1 contents here" 
-			for row in read1:
-		       		for col in row:
-		       			sys.stdout.write('%s' % col)
-				print "\n"
-
-
-			print "csv file 2 contents here"
-			for row in read2:
-				for col in row:
-		       			sys.stdout.write('%s' % col)
-				print "\n"
-		'''
-
-		#Use python lists b/c we have two files?
-
 		
-		# theoretically should have the deltas for each row...
+		# Here is the logic to build the array of delta arrays
 		bigArray = []
+		maxDeltaIndices = []
+		
 		for row in range(0,20):
 			bigArray.append([])
+			i = 0
+			maxDeltaVal = 0
+			maxDeltaIndex = 0
 			for col in range(0,30):
-				bigArray[row].append(abs(float(list1[row][col])-(float(list2[row][col]))))
-				
-		
+				deltaVal = abs((float(list1[row][col]))-(float(list2[row][col])))
+				if deltaVal > maxDeltaVal:
+					maxDeltaVal = deltaVal
+				bigArray[row].append(deltaVal)
+
+			
+			if maxDeltaVal != 0:
+				for col in range(0,30):
+					bigArray[row][col] = float(bigArray[row][col]/maxDeltaVal)
+					print "Normalized diffs: %f" % bigArray[row][col]
+
+		# Random code that just creates white image for now
+
+		img = Image.new('RGB',(400,400),"white")
+		draw = ImageDraw.Draw(img)
+		draw.line((0,0) + img.size, fill=128)
+		draw.line((0,img.size[1],img.size[0],0),fill=128)
+		del draw
+		img.save(args.outfile,"PNG")
+
 
 
 if __name__ == '__main__':
