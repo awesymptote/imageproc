@@ -68,7 +68,7 @@ def main():
 
 			ystart += 20
 		del draw
-		img.save(args.outfile,"PNG")
+		img.save(args.outfile+".png","PNG")
 
 # Large deltas = more red
 def red(delta):
