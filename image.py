@@ -6,7 +6,7 @@ import sys
 import Image, ImageDraw
 
 def main():
-	# Dougs branch
+
 	# Set up parser 
 	parser = argparse.ArgumentParser()
 	parser.add_argument("file1",help="first file to compare") # <-- required arg
@@ -31,8 +31,8 @@ def main():
 		
 		# Here is the logic to build the array of delta arrays
 		bigArray = []
-		maxDeltaIndices = []
-		
+
+		# Fill array with required values
 		for row in range(0,20):
 			bigArray.append([])
 			i = 0
@@ -44,10 +44,12 @@ def main():
 					maxDeltaVal = deltaVal
 				bigArray[row].append(deltaVal)
 
-			
+			# Normalize values
 			if maxDeltaVal != 0:
 				for col in range(0,30):
 					bigArray[row][col] = float(bigArray[row][col]/maxDeltaVal)
+
+					# If in debug mode:
 					if args.dbg:
 						print "Normalized deltas: %f" % bigArray[row][col]
 
